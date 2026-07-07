@@ -1,152 +1,425 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로또 번호 추천기</title>
-
+    <title>Premium 로또 번호 추천기</title>
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            --container-bg: rgba(255, 255, 255, 0.75);
+            --container-border: rgba(255, 255, 255, 0.4);
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --btn-bg: linear-gradient(135deg, #ff9f43 0%, #ff5252 100%);
+            --btn-hover-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+            --toggle-bg: #cbd5e1;
+            --toggle-thumb: #ffffff;
+            --ball-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            --glass-blur: 15px;
+            --transition-speed: 0.4s;
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --container-bg: rgba(15, 23, 42, 0.65);
+            --container-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --card-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+            --toggle-bg: #475569;
+            --toggle-thumb: #38bdf8;
+            --ball-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
         body {
             margin: 0;
-            font-family: "맑은 고딕", sans-serif;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            transition: background var(--transition-speed) ease;
+            overflow-x: hidden;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .container {
-            background: white;
+            background: var(--container-bg);
+            border: 1px solid var(--container-border);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 24px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            width: 500px;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            max-width: 520px;
+            position: relative;
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle-container {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            pointer-events: none;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--toggle-bg);
+            transition: .4s;
+            border-radius: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+            box-sizing: border-box;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: var(--toggle-thumb);
+            transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        input:checked + .slider {
+            background-color: var(--toggle-bg);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        .slider .icon-sun, .slider .icon-moon {
+            font-size: 12px;
+            user-select: none;
+            z-index: 1;
+        }
+        
+        .slider .icon-sun {
+            margin-left: 2px;
+        }
+        
+        .slider .icon-moon {
+            margin-right: 2px;
         }
 
         h1 {
-            color: #333;
+            color: var(--text-primary);
+            font-size: 32px;
+            font-weight: 800;
+            margin-top: 10px;
+            margin-bottom: 8px;
+            transition: color var(--transition-speed) ease;
         }
 
-        p {
-            color: #666;
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 30px;
+            font-weight: 400;
+            transition: color var(--transition-speed) ease;
         }
 
-        button {
-            margin-top: 20px;
-            padding: 15px 30px;
+        .btn-generate {
+            padding: 16px 36px;
             font-size: 18px;
+            font-weight: 700;
             border: none;
-            border-radius: 8px;
-            background: #ff9800;
+            border-radius: 50px;
+            background: var(--btn-bg);
             color: white;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 15px rgba(255, 82, 82, 0.2);
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            outline: none;
         }
 
-        button:hover {
-            background: #f57c00;
+        .btn-generate:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--btn-hover-shadow);
+        }
+
+        .btn-generate:active {
+            transform: translateY(1px);
         }
 
         #numbers {
-            margin-top: 30px;
+            margin-top: 20px;
+            max-height: 480px;
+            overflow-y: auto;
+            padding-right: 8px;
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar custom styling */
+        #numbers::-webkit-scrollbar {
+            width: 6px;
+        }
+        #numbers::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #numbers::-webkit-scrollbar-thumb {
+            background: var(--text-secondary);
+            opacity: 0.3;
+            border-radius: 10px;
+        }
+
+        .set-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            margin: 16px 0;
+            transition: transform 0.3s ease, background 0.3s ease;
+            animation: slideIn 0.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .set-title {
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            text-align: left;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ball-box {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
             flex-wrap: wrap;
-            gap: 10px;
         }
 
         .ball {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             color: white;
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 18px;
+            font-weight: 800;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: var(--ball-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            user-select: none;
+            animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .ball:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Glass highlight on balls */
+        .ball::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 8px;
+            width: 60%;
+            height: 30%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        }
+
+        /* Brand Colors for Lotto Numbers */
+        .ball-range-1 { background: linear-gradient(135deg, #f8d030 0%, #f0a500 100%); } /* 1~10: Yellow */
+        .ball-range-2 { background: linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%); } /* 11~20: Blue */
+        .ball-range-3 { background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%); } /* 21~30: Red */
+        .ball-range-4 { background: linear-gradient(135deg, #a4b0be 0%, #747d8c 100%); } /* 31~40: Gray */
+        .ball-range-5 { background: linear-gradient(135deg, #7bed9f 0%, #2ed573 100%); } /* 41~45: Green */
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🎰 로또 번호 추천기</h1>
-    <p>버튼을 누르면 추천 번호가 생성됩니다.</p>
+    <!-- Dark Mode Toggle Switch -->
+    <div class="theme-toggle-container">
+        <span class="theme-label" id="theme-text">Light</span>
+        <label class="toggle-switch">
+            <input type="checkbox" id="theme-checkbox" onchange="toggleTheme()">
+            <span class="slider">
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+            </span>
+        </label>
+    </div>
 
-    <button onclick="generateLotto()">
-        번호 추천받기
+    <h1>🎰 로또 추천기</h1>
+    <div class="subtitle">버튼을 눌러 나만의 행운 번호를 받으세요</div>
+
+    <button class="btn-generate" onclick="generateLotto()">
+        <span>번호 추천받기</span> ✨
     </button>
 
     <div id="numbers"></div>
 </div>
 
 <script>
-function generateLotto() {
-
-    const result = document.getElementById("numbers");
-    result.innerHTML = "";
-
-    // 5세트 생성
-    for(let set = 1; set <= 5; set++) {
-
-        let numbers = [];
-
-        while(numbers.length < 6){
-            let num = Math.floor(Math.random() * 45) + 1;
-
-            if(!numbers.includes(num)){
-                numbers.push(num);
-            }
+    // Load theme from localStorage on load
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        const checkbox = document.getElementById('theme-checkbox');
+        const themeText = document.getElementById('theme-text');
+        
+        if (savedTheme === 'dark') {
+            checkbox.checked = true;
+            themeText.textContent = 'Dark';
+        } else {
+            checkbox.checked = false;
+            themeText.textContent = 'Light';
         }
+    });
 
-        numbers.sort((a,b)=>a-b);
-
-        // 한 세트를 담을 영역
-        const line = document.createElement("div");
-        line.style.margin = "20px 0";
-        line.style.textAlign = "center";
-
-        // 세트 제목
-        const title = document.createElement("h3");
-        title.textContent = "🎟️ " + set + "번째 추천";
-        line.appendChild(title);
-
-        // 번호 영역
-        const ballBox = document.createElement("div");
-        ballBox.style.display = "flex";
-        ballBox.style.justifyContent = "center";
-        ballBox.style.gap = "10px";
-        ballBox.style.flexWrap = "wrap";
-
-        numbers.forEach(num => {
-
-            const ball = document.createElement("div");
-            ball.className = "ball";
-
-            if(num <= 10){
-                ball.style.background = "#fbc400";
-            }else if(num <= 20){
-                ball.style.background = "#69c8f2";
-            }else if(num <= 30){
-                ball.style.background = "#ff7272";
-            }else if(num <= 40){
-                ball.style.background = "#999999";
-            }else{
-                ball.style.background = "#7ac74f";
-            }
-
-            ball.textContent = num;
-            ballBox.appendChild(ball);
-        });
-
-        line.appendChild(ballBox);
-        result.appendChild(line);
+    // Toggle Theme
+    function toggleTheme() {
+        const checkbox = document.getElementById('theme-checkbox');
+        const themeText = document.getElementById('theme-text');
+        const isDark = checkbox.checked;
+        const theme = isDark ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', theme);
+        themeText.textContent = isDark ? 'Dark' : 'Light';
+        localStorage.setItem('theme', theme);
     }
 
-}
+    // Generate Lotto Numbers
+    function generateLotto() {
+        const result = document.getElementById("numbers");
+        result.innerHTML = "";
+
+        // 5 sets creation
+        for (let set = 1; set <= 5; set++) {
+            let numbers = [];
+
+            while (numbers.length < 6) {
+                let num = Math.floor(Math.random() * 45) + 1;
+                if (!numbers.includes(num)) {
+                    numbers.push(num);
+                }
+            }
+
+            numbers.sort((a, b) => a - b);
+
+            // Container for a set
+            const setCard = document.createElement("div");
+            setCard.className = "set-card";
+            setCard.style.animationDelay = `${(set - 1) * 0.1}s`;
+
+            // Title
+            const title = document.createElement("h3");
+            title.className = "set-title";
+            title.innerHTML = `<span>🎟️</span> ${set}번째 행운의 추천`;
+            setCard.appendChild(title);
+
+            // Balls container
+            const ballBox = document.createElement("div");
+            ballBox.className = "ball-box";
+
+            numbers.forEach((num, index) => {
+                const ball = document.createElement("div");
+                ball.className = "ball";
+                
+                // Color range setup
+                if (num <= 10) {
+                    ball.classList.add("ball-range-1");
+                } else if (num <= 20) {
+                    ball.classList.add("ball-range-2");
+                } else if (num <= 30) {
+                    ball.classList.add("ball-range-3");
+                } else if (num <= 40) {
+                    ball.classList.add("ball-range-4");
+                } else {
+                    ball.classList.add("ball-range-5");
+                }
+
+                // Add bounce animation delay for each ball to appear sequentially
+                ball.style.animationDelay = `${((set - 1) * 0.1) + (index * 0.05)}s`;
+                ball.textContent = num;
+                ballBox.appendChild(ball);
+            });
+
+            setCard.appendChild(ballBox);
+            result.appendChild(setCard);
+        }
+    }
 </script>
 </body>
 </html>
