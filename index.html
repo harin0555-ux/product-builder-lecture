@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,10 @@
     <!-- Google Fonts for premium typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700;900&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
@@ -44,12 +47,14 @@
             background: var(--bg-gradient);
             background-attachment: fixed;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 24px;
             min-height: 100vh;
             transition: background var(--transition-speed) ease;
             overflow-x: hidden;
-            padding: 20px;
+            padding: 40px 20px;
             box-sizing: border-box;
         }
 
@@ -70,8 +75,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Dark Mode Toggle */
@@ -133,28 +145,29 @@
             background-color: var(--toggle-thumb);
             transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             z-index: 2;
         }
 
-        input:checked + .slider {
+        input:checked+.slider {
             background-color: var(--toggle-bg);
         }
 
-        input:checked + .slider:before {
+        input:checked+.slider:before {
             transform: translateX(24px);
         }
 
-        .slider .icon-sun, .slider .icon-moon {
+        .slider .icon-sun,
+        .slider .icon-moon {
             font-size: 12px;
             user-select: none;
             z-index: 1;
         }
-        
+
         .slider .icon-sun {
             margin-left: 2px;
         }
-        
+
         .slider .icon-moon {
             margin-right: 2px;
         }
@@ -215,9 +228,11 @@
         #numbers::-webkit-scrollbar {
             width: 6px;
         }
+
         #numbers::-webkit-scrollbar-track {
             background: transparent;
         }
+
         #numbers::-webkit-scrollbar-thumb {
             background: var(--text-secondary);
             opacity: 0.3;
@@ -235,8 +250,15 @@
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .set-title {
@@ -276,9 +298,17 @@
         }
 
         @keyframes bounceIn {
-            0% { transform: scale(0); }
-            70% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(0);
+            }
+
+            70% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .ball:hover {
@@ -298,128 +328,303 @@
         }
 
         /* Brand Colors for Lotto Numbers */
-        .ball-range-1 { background: linear-gradient(135deg, #f8d030 0%, #f0a500 100%); } /* 1~10: Yellow */
-        .ball-range-2 { background: linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%); } /* 11~20: Blue */
-        .ball-range-3 { background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%); } /* 21~30: Red */
-        .ball-range-4 { background: linear-gradient(135deg, #a4b0be 0%, #747d8c 100%); } /* 31~40: Gray */
-        .ball-range-5 { background: linear-gradient(135deg, #7bed9f 0%, #2ed573 100%); } /* 41~45: Green */
+        .ball-range-1 {
+            background: linear-gradient(135deg, #f8d030 0%, #f0a500 100%);
+        }
+
+        /* 1~10: Yellow */
+        .ball-range-2 {
+            background: linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%);
+        }
+
+        /* 11~20: Blue */
+        .ball-range-3 {
+            background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
+        }
+
+        /* 21~30: Red */
+        .ball-range-4 {
+            background: linear-gradient(135deg, #a4b0be 0%, #747d8c 100%);
+        }
+
+        /* 31~40: Gray */
+        .ball-range-5 {
+            background: linear-gradient(135deg, #7bed9f 0%, #2ed573 100%);
+        }
+
+        /* 41~45: Green */
+
+        /* Partnership Inquiry Form Styling */
+        .partnership-card {
+            background: var(--container-bg);
+            border: 1px solid var(--container-border);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            padding: 32px 40px;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            max-width: 520px;
+            box-sizing: border-box;
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 1s ease-out;
+            text-align: left;
+        }
+
+        .partnership-card h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .partnership-card .form-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .form-input {
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            outline: none;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        [data-theme="light"] .form-input {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            color: #1e293b;
+        }
+
+        [data-theme="dark"] .form-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #f8fafc;
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .form-input:focus {
+            border-color: #ff9f43;
+            box-shadow: 0 0 0 3px rgba(255, 159, 67, 0.2);
+        }
+
+        [data-theme="light"] .form-input:focus {
+            background: #ffffff;
+        }
+
+        [data-theme="dark"] .form-input:focus {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            background: var(--btn-bg);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 12px rgba(255, 82, 82, 0.15);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--btn-hover-shadow);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <!-- Dark Mode Toggle Switch -->
-    <div class="theme-toggle-container">
-        <span class="theme-label" id="theme-text">Light</span>
-        <label class="toggle-switch">
-            <input type="checkbox" id="theme-checkbox" onchange="toggleTheme()">
-            <span class="slider">
-                <span class="icon-sun">☀️</span>
-                <span class="icon-moon">🌙</span>
-            </span>
-        </label>
+    <div class="container">
+        <!-- Dark Mode Toggle Switch -->
+        <div class="theme-toggle-container">
+            <span class="theme-label" id="theme-text">Light</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="theme-checkbox" onchange="toggleTheme()">
+                <span class="slider">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌙</span>
+                </span>
+            </label>
+        </div>
+
+        <h1>🎰 로또 추천기</h1>
+        <div class="subtitle">버튼을 눌러 나만의 행운 번호를 받으세요</div>
+
+        <button class="btn-generate" onclick="generateLotto()">
+            <span>번호 추천받기</span> ✨
+        </button>
+
+        <div id="numbers"></div>
     </div>
 
-    <h1>🎰 로또 추천기</h1>
-    <div class="subtitle">버튼을 눌러 나만의 행운 번호를 받으세요</div>
+    <!-- Partnership Inquiry Form -->
+    <div class="partnership-card">
+        <h2>🤝 제휴 및 비즈니스 문의</h2>
+        <div class="form-desc">로또 추천기 서비스와의 제휴, 광고 또는 비즈니스 협업 제안을 보내주시면 빠르게 검토 후 연락드리겠습니다.</div>
 
-    <button class="btn-generate" onclick="generateLotto()">
-        <span>번호 추천받기</span> ✨
-    </button>
+        <form action="https://formspree.io/f/xjgqdrqn" method="POST">
+            <div class="form-group">
+                <label for="company">회사명 / 이름</label>
+                <input type="text" id="company" name="name" class="form-input" placeholder="예: (주)행운컴퍼니 또는 홍길동" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">회신받을 이메일 주소</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="예: partner@example.com" required>
+            </div>
 
-    <div id="numbers"></div>
-</div>
+            <div class="form-group">
+                <label for="message">제안 내용</label>
+                <textarea id="message" name="message" class="form-input form-textarea" placeholder="제휴 또는 협업 제안 내용을 자유롭게 작성해 주세요." required></textarea>
+            </div>
 
-<script>
-    // Load theme from localStorage on load
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        
-        const checkbox = document.getElementById('theme-checkbox');
-        const themeText = document.getElementById('theme-text');
-        
-        if (savedTheme === 'dark') {
-            checkbox.checked = true;
-            themeText.textContent = 'Dark';
-        } else {
-            checkbox.checked = false;
-            themeText.textContent = 'Light';
-        }
-    });
+            <button type="submit" class="btn-submit">
+                <span>문의 전송하기</span> 🚀
+            </button>
+        </form>
+    </div>
 
-    // Toggle Theme
-    function toggleTheme() {
-        const checkbox = document.getElementById('theme-checkbox');
-        const themeText = document.getElementById('theme-text');
-        const isDark = checkbox.checked;
-        const theme = isDark ? 'dark' : 'light';
-        
-        document.documentElement.setAttribute('data-theme', theme);
-        themeText.textContent = isDark ? 'Dark' : 'Light';
-        localStorage.setItem('theme', theme);
-    }
+    <script>
+        // Load theme from localStorage on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
 
-    // Generate Lotto Numbers
-    function generateLotto() {
-        const result = document.getElementById("numbers");
-        result.innerHTML = "";
+            const checkbox = document.getElementById('theme-checkbox');
+            const themeText = document.getElementById('theme-text');
 
-        // 5 sets creation
-        for (let set = 1; set <= 5; set++) {
-            let numbers = [];
-
-            while (numbers.length < 6) {
-                let num = Math.floor(Math.random() * 45) + 1;
-                if (!numbers.includes(num)) {
-                    numbers.push(num);
-                }
+            if (savedTheme === 'dark') {
+                checkbox.checked = true;
+                themeText.textContent = 'Dark';
+            } else {
+                checkbox.checked = false;
+                themeText.textContent = 'Light';
             }
+        });
 
-            numbers.sort((a, b) => a - b);
+        // Toggle Theme
+        function toggleTheme() {
+            const checkbox = document.getElementById('theme-checkbox');
+            const themeText = document.getElementById('theme-text');
+            const isDark = checkbox.checked;
+            const theme = isDark ? 'dark' : 'light';
 
-            // Container for a set
-            const setCard = document.createElement("div");
-            setCard.className = "set-card";
-            setCard.style.animationDelay = `${(set - 1) * 0.1}s`;
+            document.documentElement.setAttribute('data-theme', theme);
+            themeText.textContent = isDark ? 'Dark' : 'Light';
+            localStorage.setItem('theme', theme);
+        }
 
-            // Title
-            const title = document.createElement("h3");
-            title.className = "set-title";
-            title.innerHTML = `<span>🎟️</span> ${set}번째 행운의 추천`;
-            setCard.appendChild(title);
+        // Generate Lotto Numbers
+        function generateLotto() {
+            const result = document.getElementById("numbers");
+            result.innerHTML = "";
 
-            // Balls container
-            const ballBox = document.createElement("div");
-            ballBox.className = "ball-box";
+            // 5 sets creation
+            for (let set = 1; set <= 5; set++) {
+                let numbers = [];
 
-            numbers.forEach((num, index) => {
-                const ball = document.createElement("div");
-                ball.className = "ball";
-                
-                // Color range setup
-                if (num <= 10) {
-                    ball.classList.add("ball-range-1");
-                } else if (num <= 20) {
-                    ball.classList.add("ball-range-2");
-                } else if (num <= 30) {
-                    ball.classList.add("ball-range-3");
-                } else if (num <= 40) {
-                    ball.classList.add("ball-range-4");
-                } else {
-                    ball.classList.add("ball-range-5");
+                while (numbers.length < 6) {
+                    let num = Math.floor(Math.random() * 45) + 1;
+                    if (!numbers.includes(num)) {
+                        numbers.push(num);
+                    }
                 }
 
-                // Add bounce animation delay for each ball to appear sequentially
-                ball.style.animationDelay = `${((set - 1) * 0.1) + (index * 0.05)}s`;
-                ball.textContent = num;
-                ballBox.appendChild(ball);
-            });
+                numbers.sort((a, b) => a - b);
 
-            setCard.appendChild(ballBox);
-            result.appendChild(setCard);
+                // Container for a set
+                const setCard = document.createElement("div");
+                setCard.className = "set-card";
+                setCard.style.animationDelay = `${(set - 1) * 0.1}s`;
+
+                // Title
+                const title = document.createElement("h3");
+                title.className = "set-title";
+                title.innerHTML = `<span>🎟️</span> ${set}번째 행운의 추천`;
+                setCard.appendChild(title);
+
+                // Balls container
+                const ballBox = document.createElement("div");
+                ballBox.className = "ball-box";
+
+                numbers.forEach((num, index) => {
+                    const ball = document.createElement("div");
+                    ball.className = "ball";
+
+                    // Color range setup
+                    if (num <= 10) {
+                        ball.classList.add("ball-range-1");
+                    } else if (num <= 20) {
+                        ball.classList.add("ball-range-2");
+                    } else if (num <= 30) {
+                        ball.classList.add("ball-range-3");
+                    } else if (num <= 40) {
+                        ball.classList.add("ball-range-4");
+                    } else {
+                        ball.classList.add("ball-range-5");
+                    }
+
+                    // Add bounce animation delay for each ball to appear sequentially
+                    ball.style.animationDelay = `${((set - 1) * 0.1) + (index * 0.05)}s`;
+                    ball.textContent = num;
+                    ballBox.appendChild(ball);
+                });
+
+                setCard.appendChild(ballBox);
+                result.appendChild(setCard);
+            }
         }
-    }
-</script>
+    </script>
 </body>
+
 </html>
